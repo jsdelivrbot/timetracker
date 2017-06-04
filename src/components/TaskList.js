@@ -11,13 +11,14 @@ const withBorder = {
   border: '1px solid #666'
 }
 
-export default function NewTask() {
+export default function NewTask({tasks, putAbove, putBelow, editTask, editTime, remove, complete, filter}) {
   return (
     <Grid style={withBorder}>
-      <Row style={withBorder}>
+    { tasks.map((task, idx) => {
+      return (<Row key={idx} style={withBorder}>
         <Col md={2} style={withBorder}>
-          <Button bsStyle="link"><Glyphicon glyph="chevron-up" /></Button>
-          <Button bsStyle="link"><Glyphicon glyph="chevron-down" /></Button>
+          <Button bsStyle="link" onClick={putAbove}><Glyphicon glyph="chevron-up" /></Button>
+          <Button bsStyle="link" onClick={putBelow}><Glyphicon glyph="chevron-down" /></Button>
         </Col>
 
         <Col md={6} style={withBorder}>
@@ -25,7 +26,7 @@ export default function NewTask() {
             <FormControl
               type="text"
               placeholder="En que vas a trabajar"
-              onChange={() => console.log("Change task")}
+              onChange={editTask}
             />
             <FormControl.Feedback />
           </FormGroup>
@@ -35,30 +36,29 @@ export default function NewTask() {
           <FormControl
             type="text"
             placeholder="12:34"
-            onChange={() => console.log("Change time")}
+            onChange={editTime}
           />
         </Col>
 
         <Col md={2} style={withBorder}>
-          <Button bsStyle="link"><Glyphicon glyph="remove" /></Button>
-          <Button bsStyle="link"><Glyphicon glyph="ok" /></Button>
+          <Button bsStyle="link" onClick={remove}><Glyphicon glyph="remove" /></Button>
+          <Button bsStyle="link" onClick={complete}><Glyphicon glyph="ok" /></Button>
         </Col>
-      </Row>
+      </Row>)
+    }) }
 
       <Row>
         <Col md={2} mdOffset={3}>
-          <Button bsStyle="link">corto</Button>
+          <Button bsStyle="link" onClick={() => filter('short')}>corto</Button>
         </Col>
         <Col md={2}>
-          <Button bsStyle="link">medio</Button>
+          <Button bsStyle="link" onClick={() => filter('medium')}>medio</Button>
         </Col>
         <Col md={2}>
-          <Button bsStyle="link">largo</Button>
+          <Button bsStyle="link" onClick={() => filter('long')}>largo</Button>
         </Col>
       </Row>
     </Grid>
   )
 }
-
-
 

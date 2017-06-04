@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { CurrentTask, NewTask, TaskList, History } from './timetracker'
+import { HistoricProgress, AddTask, ActiveTask, UserTaskList } from './containers'
 import './App.css'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <CurrentTask />
-        <NewTask />
-        <TaskList />
-        <History />
+        <ActiveTask />
+        <AddTask />
+        <UserTaskList />
+        <HistoricProgress />
       </div>
     )
   }

@@ -6,11 +6,11 @@ import './index.css'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { currentTask } from './timetracker'
+import timetracker from './reducers'
 
 injectTapEventPlugin()
 
-const store = createStore(currentTask)
+const store = createStore(timetracker)
 
 ReactDOM.render(
   <Provider store={store}>

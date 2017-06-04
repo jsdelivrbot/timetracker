@@ -8,4 +8,4 @@ const currentTask = (state = initialState, action) => {
   return state
 }
 
-export { currentTask }
+export default currentTask
