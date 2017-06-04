@@ -20,9 +20,9 @@ export const editTask = (currentIndex, value) => {
   }
 }
 
-export const editTime = (currentIndex, value) => {
+export const editDuration = (currentIndex, value) => {
   return {
-    type: 'editTime',
+    type: 'editDuration',
     currentIndex,
     value
   }
@@ -42,10 +42,11 @@ export const complete = currentIndex => {
   }
 }
 
-export const filter = duration => {
+export const filter = (type, value) => {
   return {
     type: 'filter',
-    duration
+    filter: type,
+    value
   }
 }
 

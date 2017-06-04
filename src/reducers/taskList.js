@@ -23,14 +23,17 @@ const remove = (currentTasks, index) => {
 
 const complete = (currentTasks, index) => {
   let tasks = _.clone(currentTasks)
-  tasks[index].completed = true
+  const completedTask = tasks[index]
+  tasks.splice(index, 1)
+  completedTask.completed = true
+  tasks.push(completedTask)
   return {tasks}
 }
 
-const setFilter = (state, duration) => {
-  return {
-    currentFilter: duration === state.currentFilter ? 'none' : duration
-  }
+const setFilter = (state, filter, value) => {
+  const filters = _.clone(state.filters)
+  filters[filter] = filters[filter] === value ? 'none' : value
+  return { filters }
 }
 
 const addTask = (currentTasks, task) => {
@@ -55,19 +58,30 @@ const taskList = (state = initialState, action) => {
       }
       break;
     case 'editTask':
-    case 'editTime':
-      break;
+      const editTaskState = _.merge({}, state)
+      editTaskState.tasks[action.currentIndex].description = action.value
+      return editTaskState
+
+    case 'editDuration':
+      const editDurationState = _.merge({}, state)
+      editDurationState.tasks[action.currentIndex].duration = action.value
+      editDurationState.tasks[action.currentIndex].remaining = action.value
+      return editDurationState
+
     case 'remove':
       delta = remove(state.tasks, action.currentIndex)
-      const newState = _.merge({}, state)
-      newState.tasks = delta.tasks;
-      return newState
+      const removeState = _.merge({}, state)
+      removeState.tasks = delta.tasks
+      return removeState
 
     case 'complete':
       delta = complete(state.tasks, action.currentIndex)
-      break;
+      const completeState = _.merge({}, state)
+      completeState.tasks = delta.tasks
+      return completeState
+
     case 'filter':
-      delta = setFilter(state, action.duration)
+      delta = setFilter(state, action.filter, action.value)
       break;
     default:
       break

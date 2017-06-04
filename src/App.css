@@ -11,6 +11,10 @@
   color: #d9534f;
 }
 
+.option-btn.primary {
+  color: #265a88;
+}
+
 .option-btn.success {
   color: #5cb85c;
 }
@@ -30,3 +34,6 @@
   padding-top: 10px;
 }
 
+.hidden-md {
+  display: none;
+}
