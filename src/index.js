@@ -10,7 +10,19 @@ import timetracker from './reducers'
 
 injectTapEventPlugin()
 
-const store = createStore(timetracker)
+const initialState = {
+  currentTask: {
+    currentFilter: 'none',
+    tasks: [
+      {description: "uno", duration: 20*60, remaining: 120, completed: false},
+      {description: "dos", duration: 31*60, remaining: 120, completed: false},
+      {description: "tres", duration: 50*60, remaining: 120, completed: false},
+      {description: "cuatro", duration: 70*60, remaining: 120, completed: false},
+    ]
+  }
+}
+
+const store = createStore(timetracker, initialState)
 
 ReactDOM.render(
   <Provider store={store}>

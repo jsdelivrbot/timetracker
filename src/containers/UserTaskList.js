@@ -1,25 +1,36 @@
 import { connect } from 'react-redux'
 import { TaskList } from '../components'
+import { moveUp, moveDown, editTask, editTime, remove, complete, filter } from '../actions'
 
-const getTasks = () => {
-  return [
-    {},
-  ]
+const mapStateToProps = ({currentTask}) => {
+  return {
+    ...currentTask,
+    filteredTasks: () => {
+      return currentTask.tasks.filter(task => {
+        switch(currentTask.currentFilter){
+          case 'short':
+            return task.duration <= 30 * 60
+          case 'medium':
+            return task.duration > 30 * 60 && task.duration <= 60 * 60
+          case 'long':
+            return task.duration > 60 * 60
+          default:
+            return true
+        }
+      })
+    }
+  }
 }
-
-const mapStateToProps = state => ({
-  tasks: getTasks()
-})
 
 const mapDispatchToProps = dispatch => {
   return {
-    putAbove: () => { console.log("[*] put above") },
-    putBelow: () => { console.log("[*] put below") },
-    editTask: () => { console.log("[*] edit task") },
-    editTime: () => { console.log("[*] edit time") },
-    remove: () => { console.log("[*] remove") },
-    complete: () => { console.log("[*] complete") },
-    filter: type => { console.log("[*] filter by", type) },
+    moveUp: idx => dispatch(moveUp(idx)),
+    moveDown: idx => dispatch(moveDown(idx)),
+    editTask: (idx, value) => dispatch(editTask(idx, value)),
+    editTime: (idx, value) => dispatch(editTime(idx, value)),
+    remove: idx => dispatch(remove(idx)),
+    complete: idx => dispatch(complete(idx)),
+    filter: duration => dispatch(filter(duration)),
   }
 }
 

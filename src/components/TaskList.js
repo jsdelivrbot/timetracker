@@ -11,22 +11,23 @@ const withBorder = {
   border: '1px solid #666'
 }
 
-export default function NewTask({tasks, putAbove, putBelow, editTask, editTime, remove, complete, filter}) {
+export default function TaskList({filteredTasks, moveUp, moveDown, editTask, editTime, remove, complete, filter}) {
   return (
     <Grid style={withBorder}>
-    { tasks.map((task, idx) => {
+    { filteredTasks().map((task, idx) => {
       return (<Row key={idx} style={withBorder}>
         <Col md={2} style={withBorder}>
-          <Button bsStyle="link" onClick={putAbove}><Glyphicon glyph="chevron-up" /></Button>
-          <Button bsStyle="link" onClick={putBelow}><Glyphicon glyph="chevron-down" /></Button>
+          <Button bsStyle="link" onClick={() => moveUp(idx)}><Glyphicon glyph="chevron-up" /></Button>
+          <Button bsStyle="link" onClick={() => moveDown(idx)}><Glyphicon glyph="chevron-down" /></Button>
         </Col>
 
         <Col md={6} style={withBorder}>
           <FormGroup>
             <FormControl
               type="text"
-              placeholder="En que vas a trabajar"
-              onChange={editTask}
+              placeholder="En que vas a trabajar?"
+              value={task.description}
+              onChange={() => editTask(idx, task.description)}
             />
             <FormControl.Feedback />
           </FormGroup>
@@ -35,14 +36,15 @@ export default function NewTask({tasks, putAbove, putBelow, editTask, editTime, 
         <Col md={2} style={withBorder}>
           <FormControl
             type="text"
-            placeholder="12:34"
-            onChange={editTime}
+            placeholder="30:00"
+            value={task.remaining}
+            onChange={() => editTime(idx, task.time)}
           />
         </Col>
 
         <Col md={2} style={withBorder}>
-          <Button bsStyle="link" onClick={remove}><Glyphicon glyph="remove" /></Button>
-          <Button bsStyle="link" onClick={complete}><Glyphicon glyph="ok" /></Button>
+          <Button bsStyle="link" onClick={() => remove(idx)}><Glyphicon glyph="remove" /></Button>
+          <Button bsStyle="link" onClick={() => complete(idx)}><Glyphicon glyph="ok" /></Button>
         </Col>
       </Row>)
     }) }
