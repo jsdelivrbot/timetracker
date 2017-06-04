@@ -13,7 +13,7 @@ const withBorder = {
 
 export default function History() {
   return (
-    <Grid style={withBorder}>
+    <Grid className="section history" style={withBorder}>
       <Row style={withBorder}>
         <Col md={12} style={withBorder}>
           <h1>Aqui va una grafica</h1>

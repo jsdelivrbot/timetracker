@@ -83,6 +83,20 @@ const taskList = (state = initialState, action) => {
     case 'filter':
       delta = setFilter(state, action.filter, action.value)
       break;
+
+    case 'toggleCounter':
+      if (action.isRunning) {
+        const newState = _.merge({}, state)
+        newState.tasks[0].remaining = action.remaining
+        return newState
+      }
+      break
+
+    case 'resetCounter':
+        const newState = _.merge({}, state)
+        newState.tasks[0].remaining = newState.tasks[0].duration
+        return newState
+
     default:
       break
   }

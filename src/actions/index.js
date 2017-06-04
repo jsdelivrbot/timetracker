@@ -74,3 +74,18 @@ export const editNewTask = value => {
     value
   }
 }
+
+export const toggleCounter = (isRunning, remaining) => {
+  return {
+    type: 'toggleCounter',
+    isRunning,
+    remaining
+  }
+}
+
+export const resetCounter = isRunning => {
+  return {
+    type: 'resetCounter',
+    isRunning
+  }
+}

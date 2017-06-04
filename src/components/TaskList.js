@@ -16,7 +16,7 @@ export default function TaskList({filteredTasks, moveUp, moveDown, editTask, edi
   }
 
   return (
-    <Grid>
+    <Grid className="section task-list">
     { filteredTasks().map((task, idx) => {
       return (<Row key={idx}>
         <Col md={1} mdHidden={task.completed}>

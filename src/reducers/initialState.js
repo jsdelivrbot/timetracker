@@ -1,5 +1,6 @@
 
 const initialState = {
+  activeTask: {counterStarted: null, running: false},
   newTask: {description: "", duration: ""},
   taskList: {
     filters: {duration: 'none', status: 'none'},

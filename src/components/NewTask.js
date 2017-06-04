@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/lib/Row';
 
 export default function NewTask({ addTask, editNewTask, editNewDuration, newTask }) {
   return (
-    <Grid>
+    <Grid className="section new-task">
       <Row>
         <Col md={6} mdOffset={1}>
           <FormGroup>

@@ -7,16 +7,21 @@
   padding: 10px 0 0 10px;
 }
 
-.option-btn.danger {
+.danger {
   color: #d9534f;
 }
 
-.option-btn.primary {
+.primary {
   color: #265a88;
 }
 
-.option-btn.success {
+.success {
   color: #5cb85c;
+}
+
+.header-btn {
+  padding: 15px 10px;
+  font-size: 1.5em;
 }
 
 .form-control-text {
@@ -36,4 +41,12 @@
 
 .hidden-md {
   display: none;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.app {
+  padding: 20px;
 }

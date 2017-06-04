@@ -2,34 +2,70 @@ import React from 'react'
 import Grid from 'react-bootstrap/lib/Grid';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
 import Button from 'react-bootstrap/lib/Button';
+import _ from 'lodash'
 
-const withBorder = {
-  border: '1px solid #666'
-}
+export default class CurrentTask extends React.Component {
 
-export default function CurrentTask({resume, reset, complete, remove}) {
-  return (
-    <Grid style={withBorder}>
-      <Col md={2} style={withBorder}>
-        <Button bsStyle="primary" block onClick={resume}>Primary</Button>
-      </Col>
+  componentWillMount(){
+    this.intervalId = setInterval(this.forceUpdate.bind(this), 1000)
+  }
 
-      <Col md={10} style={withBorder}>
-        <Col md={2} style={withBorder}>
-          <h1>1:03</h1>
-        </Col>
+  componentWillUnmount(){
+    clearInterval(this.intervalId)
+  }
 
-        <Col md={1} style={withBorder}>
-          <Button bsStyle="link" onClick={reset}><Glyphicon glyph="repeat" /></Button>
-        </Col>
+  render(){
+    let remaining = this.props.activeTask.remaining
 
-        <Col md={6} style={withBorder}>
-          <Col md={12} style={withBorder}><Button bsStyle="link" onClick={complete}>Completar</Button></Col>
-          <Col md={12} style={withBorder}><Button bsStyle="link" onClick={remove}>Eliminar</Button></Col>
-        </Col>
-      </Col>
-    </Grid>
-  )
+    if (!_.isNil(this.props.counterStarted)) {
+      const elapsed = new Date().getTime() - this.props.counterStarted
+      remaining = this.props.activeTask.remaining - Math.floor(elapsed / 1000)
+    }
+
+    return (
+      <Grid className="section current-task">
+        <Row>
+          <Col md={1} mdOffset={2} mdHidden={!this.props.isRunning}>
+            <Button
+              bsStyle="warning"
+              bsSize="large"
+              style={{padding: '18px 25px'}}
+              onClick={() => this.props.toggleCounter(this.props.isRunning, remaining)}><Glyphicon glyph="pause" /></Button>
+          </Col>
+
+          <Col md={1} mdOffset={2} mdHidden={this.props.isRunning}>
+            <Button
+              bsStyle="primary"
+              bsSize="large"
+              style={{padding: '18px 25px'}}
+              onClick={() => this.props.toggleCounter(this.props.isRunning, remaining)}><Glyphicon glyph="play" /></Button>
+          </Col>
+
+          <Col md={8}>
+            <Col md={2}>
+              <span style={{fontSize: '3em'}}>{remaining}</span>
+            </Col>
+
+            <Col md={3}>
+              <Button
+                bsStyle="link" bsSize="large"
+                className="header-btn"
+                onClick={() => this.props.reset(this.props.isRunning)}><Glyphicon glyph="repeat" /></Button>
+              <Button
+                bsStyle="link" bsSize="large"
+                className="header-btn danger"
+                onClick={() => this.props.remove(0)}><Glyphicon glyph="remove" /></Button>
+              <Button
+                bsStyle="link" bsSize="large"
+                className="header-btn success"
+                onClick={() => this.props.complete(0)}><Glyphicon glyph="ok" /></Button>
+            </Col>
+          </Col>
+        </Row>
+      </Grid>
+    )
+  }
 }
 
