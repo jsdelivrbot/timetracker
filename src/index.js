@@ -4,8 +4,17 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { currentTask } from './timetracker'
 
 injectTapEventPlugin()
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const store = createStore(currentTask)
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , document.getElementById('root'))
 registerServiceWorker()
