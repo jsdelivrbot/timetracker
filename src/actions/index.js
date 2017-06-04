@@ -52,7 +52,11 @@ export const filter = duration => {
 export const addTask = newTask => {
   return {
     type: 'addTask',
-    ...newTask
+    task: {
+      ...newTask,
+      remaining: newTask.duration,
+      completed: false
+    }
   }
 }
 

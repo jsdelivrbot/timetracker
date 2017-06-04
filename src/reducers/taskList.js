@@ -33,13 +33,8 @@ const setFilter = (state, duration) => {
   }
 }
 
-const addTask = (currentTasks, description, duration) => {
-  return {tasks: [{
-    description,
-    duration,
-    remaining: duration,
-    completed: false
-  }].concat(currentTasks)}
+const addTask = (currentTasks, task) => {
+  return {tasks: [task].concat(currentTasks)}
 }
 
 const taskList = (state = initialState, action) => {
@@ -47,7 +42,7 @@ const taskList = (state = initialState, action) => {
 
   switch(action.type){
     case 'addTask':
-      delta = addTask(state.tasks, action.description, action.duration)
+      delta = addTask(state.tasks, action.task)
       break
     case 'moveUp':
       if (action.currentIndex > 0) {
@@ -64,7 +59,10 @@ const taskList = (state = initialState, action) => {
       break;
     case 'remove':
       delta = remove(state.tasks, action.currentIndex)
-      break;
+      const newState = _.merge({}, state)
+      newState.tasks = delta.tasks;
+      return newState
+
     case 'complete':
       delta = complete(state.tasks, action.currentIndex)
       break;

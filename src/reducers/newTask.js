@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import initialState from './initialState'
 
-const addTask = (currentTasks, description, duration) => {
+const addTask = (currentTasks, task) => {
   return {description: "", duration: ""}
 }
 
@@ -10,7 +10,7 @@ const newTask = (state = initialState, action) => {
 
   switch(action.type){
     case 'addTask':
-      delta = addTask(state.tasks, action.description, action.duration)
+      delta = addTask(state.tasks, action.task)
       break
     case 'editNewTask':
       delta = {description: action.value}
