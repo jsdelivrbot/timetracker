@@ -7,20 +7,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import timetracker from './reducers'
+import initialState from './reducers/initialState'
 
 injectTapEventPlugin()
-
-const initialState = {
-  currentTask: {
-    currentFilter: 'none',
-    tasks: [
-      {description: "uno", duration: 20*60, remaining: 120, completed: false},
-      {description: "dos", duration: 31*60, remaining: 120, completed: false},
-      {description: "tres", duration: 50*60, remaining: 120, completed: false},
-      {description: "cuatro", duration: 70*60, remaining: 120, completed: false},
-    ]
-  }
-}
 
 const store = createStore(timetracker, initialState)
 

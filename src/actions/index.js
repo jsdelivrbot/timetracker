@@ -48,3 +48,24 @@ export const filter = duration => {
     duration
   }
 }
+
+export const addTask = newTask => {
+  return {
+    type: 'addTask',
+    ...newTask
+  }
+}
+
+export const editNewDuration = value => {
+  return {
+    type: 'editNewDuration',
+    value
+  }
+}
+
+export const editNewTask = value => {
+  return {
+    type: 'editNewTask',
+    value
+  }
+}

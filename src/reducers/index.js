@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import currentTask from './currentTask'
+import taskList from './taskList'
+import newTask from './newTask'
 
 const timetracker = combineReducers({
-  currentTask
+  taskList,
+  newTask
 })
 
 export default timetracker

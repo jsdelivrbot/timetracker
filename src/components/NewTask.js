@@ -5,36 +5,39 @@ import Col from 'react-bootstrap/lib/Col';
 import Button from 'react-bootstrap/lib/Button';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
+import Row from 'react-bootstrap/lib/Row';
 
-const withBorder = {
-  border: '1px solid #666'
-}
-
-export default function NewTask() {
+export default function NewTask({ addTask, editNewTask, editNewDuration, newTask }) {
   return (
-    <Grid style={withBorder}>
-      <Col md={6} style={withBorder}>
-        <FormGroup>
+    <Grid>
+      <Row>
+        <Col md={6} mdOffset={1}>
+          <FormGroup>
+            <FormControl
+              type="text"
+              bsStyle="text"
+              placeholder="En que vas a trabajar?"
+              value={newTask.description}
+              onChange={editNewTask.bind(this)}
+            />
+            <FormControl.Feedback />
+          </FormGroup>
+        </Col>
+
+        <Col md={1}>
           <FormControl
+            bsStyle="time"
             type="text"
-            placeholder="En que vas a trabajar"
-            onChange={() => console.log("Change task")}
+            placeholder="2:34"
+            value={newTask.duration}
+            onChange={editNewDuration.bind(this)}
           />
-          <FormControl.Feedback />
-        </FormGroup>
-      </Col>
+        </Col>
 
-      <Col md={2} style={withBorder}>
-        <FormControl
-          type="text"
-          placeholder="12:34"
-          onChange={() => console.log("Change time")}
-        />
-      </Col>
-
-      <Col md={1} style={withBorder}>
-        <Button bsStyle="link"><Glyphicon glyph="plus" /></Button>
-      </Col>
+        <Col md={1}>
+          <Button bsStyle="link" className="option-btn" onClick={() => addTask(newTask)}><Glyphicon glyph="plus" /></Button>
+        </Col>
+      </Row>
     </Grid>
   )
 }

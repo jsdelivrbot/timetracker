@@ -1,8 +1,5 @@
 import _ from 'lodash'
-
-const initialState = {
-  tasks: []
-}
+import initialState from './initialState'
 
 const moveElementUp = (currentTasks, index) => {
   let tasks = _.clone(currentTasks)
@@ -32,35 +29,46 @@ const complete = (currentTasks, index) => {
 
 const setFilter = (state, duration) => {
   return {
-    ...state,
-    currentFilter: duration
+    currentFilter: duration === state.currentFilter ? 'none' : duration
   }
 }
 
-const currentTask = (state = initialState, action) => {
+const taskList = (state = initialState, action) => {
+  let delta
+
   switch(action.type){
     case 'moveUp':
       if (action.currentIndex > 0) {
-        return moveElementUp(state.tasks, action.currentIndex)
+        delta = moveElementUp(state.tasks, action.currentIndex)
       }
       break;
     case 'moveDown':
       if (action.currentIndex < state.tasks.length-1) {
-        return moveElementDown(state.tasks, action.currentIndex)
+        delta = moveElementDown(state.tasks, action.currentIndex)
       }
       break;
     case 'editTask':
     case 'editTime':
+      break;
     case 'remove':
-      return remove(state.tasks, action.currentIndex)
+      delta = remove(state.tasks, action.currentIndex)
+      break;
     case 'complete':
-      return complete(state.tasks, action.currentIndex)
+      delta = complete(state.tasks, action.currentIndex)
+      break;
     case 'filter':
-      return setFilter(state, action.duration)
+      delta = setFilter(state, action.duration)
+      break;
     default:
       break
   }
+
+  if (!_.isNil(delta)) {
+    const newState = _.merge({}, state, delta)
+    return newState
+  }
+
   return state
 }
 
-export default currentTask
+export default taskList

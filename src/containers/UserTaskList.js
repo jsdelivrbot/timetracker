@@ -2,12 +2,11 @@ import { connect } from 'react-redux'
 import { TaskList } from '../components'
 import { moveUp, moveDown, editTask, editTime, remove, complete, filter } from '../actions'
 
-const mapStateToProps = ({currentTask}) => {
+const mapStateToProps = ({taskList}) => {
   return {
-    ...currentTask,
     filteredTasks: () => {
-      return currentTask.tasks.filter(task => {
-        switch(currentTask.currentFilter){
+      return taskList.tasks.filter(task => {
+        switch(taskList.currentFilter){
           case 'short':
             return task.duration <= 30 * 60
           case 'medium':

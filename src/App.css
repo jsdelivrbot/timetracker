@@ -2,3 +2,31 @@
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
+
+.option-btn {
+  padding: 10px 0 0 10px;
+}
+
+.option-btn.danger {
+  color: #d9534f;
+}
+
+.option-btn.success {
+  color: #5cb85c;
+}
+
+.form-control-text {
+  border: 0 !important;
+  border-bottom: 1px solid #337ab7 !important;
+  border-radius: 0;
+}
+
+.form-control-time {
+  border: 0 !important;
+  font-size: 1.3em;
+}
+
+.option-container {
+  padding-top: 10px;
+}
+
