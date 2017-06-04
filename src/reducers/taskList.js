@@ -33,10 +33,22 @@ const setFilter = (state, duration) => {
   }
 }
 
+const addTask = (currentTasks, description, duration) => {
+  return {tasks: [{
+    description,
+    duration,
+    remaining: duration,
+    completed: false
+  }].concat(currentTasks)}
+}
+
 const taskList = (state = initialState, action) => {
   let delta
 
   switch(action.type){
+    case 'addTask':
+      delta = addTask(state.tasks, action.description, action.duration)
+      break
     case 'moveUp':
       if (action.currentIndex > 0) {
         delta = moveElementUp(state.tasks, action.currentIndex)

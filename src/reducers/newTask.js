@@ -2,18 +2,12 @@ import _ from 'lodash'
 import initialState from './initialState'
 
 const addTask = (currentTasks, description, duration) => {
-  return {tasks: [{
-    description,
-    duration,
-    remaining: duration,
-    completed: false
-  }].concat(currentTasks)}
+  return {description: "", duration: ""}
 }
 
 const newTask = (state = initialState, action) => {
   let delta
 
-  console.log("State:", state, ", Action:", action)
   switch(action.type){
     case 'addTask':
       delta = addTask(state.tasks, action.description, action.duration)

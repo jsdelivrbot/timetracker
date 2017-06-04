@@ -3,7 +3,7 @@ import { NewTask } from '../components'
 import { addTask, editNewTask, editNewDuration } from '../actions'
 
 const mapStateToProps = ({newTask}) => {
-  return {newTask}
+  return { newTask }
 }
 
 const mapDipatchToProps = dispatch => {
