@@ -11,7 +11,7 @@ export default function NewTask({ addTask, editNewTask, editNewDuration, newTask
   return (
     <Grid className="section new-task">
       <Row>
-        <Col md={6} mdOffset={1}>
+        <Col md={9} mdOffset={1}>
           <FormGroup>
             <FormControl
               type="text"

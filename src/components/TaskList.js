@@ -24,7 +24,7 @@ export default function TaskList({filteredTasks, moveUp, moveDown, editTask, edi
           <Button bsStyle="link" className="option-btn" onClick={() => moveDown(idx)}><Glyphicon glyph="chevron-down" /></Button>
         </Col>
 
-        <Col md={6} mdOffset={task.completed ? 1 : 0}>
+        <Col md={9} mdOffset={task.completed ? 1 : 0}>
           <FormGroup>
             <FormControl
               bsStyle="text"
@@ -63,7 +63,7 @@ export default function TaskList({filteredTasks, moveUp, moveDown, editTask, edi
     }) }
 
       <Row>
-        <Col md={4} mdOffset={1}>
+        <Col md={4} mdOffset={2}>
           <FormGroup>
             <InputGroup>
               <InputGroup.Addon>Por duracion</InputGroup.Addon>
@@ -76,7 +76,7 @@ export default function TaskList({filteredTasks, moveUp, moveDown, editTask, edi
           </FormGroup>
         </Col>
 
-        <Col md={4} >
+        <Col md={4}>
           <FormGroup>
             <InputGroup>
               <InputGroup.Addon>Por status</InputGroup.Addon>

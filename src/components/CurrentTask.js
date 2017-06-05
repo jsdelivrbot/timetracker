@@ -27,7 +27,7 @@ export default class CurrentTask extends React.Component {
     return (
       <Grid className="section current-task">
         <Row>
-          <Col md={1} mdOffset={2} mdHidden={!this.props.isRunning}>
+          <Col md={1} mdOffset={3} mdHidden={!this.props.isRunning}>
             <Button
               bsStyle="warning"
               bsSize="large"
@@ -35,7 +35,7 @@ export default class CurrentTask extends React.Component {
               onClick={() => this.props.toggleCounter(this.props.isRunning, remaining)}><Glyphicon glyph="pause" /></Button>
           </Col>
 
-          <Col md={1} mdOffset={2} mdHidden={this.props.isRunning}>
+          <Col md={1} mdOffset={3} mdHidden={this.props.isRunning}>
             <Button
               bsStyle="primary"
               bsSize="large"
@@ -43,20 +43,26 @@ export default class CurrentTask extends React.Component {
               onClick={() => this.props.toggleCounter(this.props.isRunning, remaining)}><Glyphicon glyph="play" /></Button>
           </Col>
 
-          <Col md={8}>
-            <Col md={2}>
-              <span style={{fontSize: '3em'}}>{remaining}</span>
+          <Col md={6}>
+            <Col md={3}>
+              <span style={{letterSpacing: '5px', fontSize: '3em'}}>{remaining}</span>
             </Col>
 
-            <Col md={3}>
+            <Col md={1}>
               <Button
                 bsStyle="link" bsSize="large"
                 className="header-btn"
                 onClick={() => this.props.reset(this.props.isRunning)}><Glyphicon glyph="repeat" /></Button>
+            </Col>
+
+            <Col md={1}>
               <Button
                 bsStyle="link" bsSize="large"
                 className="header-btn danger"
                 onClick={() => this.props.remove(0)}><Glyphicon glyph="remove" /></Button>
+            </Col>
+
+            <Col md={1}>
               <Button
                 bsStyle="link" bsSize="large"
                 className="header-btn success"
