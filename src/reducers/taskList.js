@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import initialState from './initialState'
+import { convertToSeconds } from '../utils'
 
 const moveElementUp = (currentTasks, index) => {
   let tasks = _.clone(currentTasks)
@@ -37,6 +38,8 @@ const setFilter = (state, filter, value) => {
 }
 
 const addTask = (currentTasks, task) => {
+  const seconds = convertToSeconds(task.duration)
+  task.duration = task.remaining = seconds
   return {tasks: [task].concat(currentTasks)}
 }
 

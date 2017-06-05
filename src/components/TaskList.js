@@ -1,13 +1,14 @@
 import React from 'react'
-import Grid from 'react-bootstrap/lib/Grid';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Col from 'react-bootstrap/lib/Col';
-import Button from 'react-bootstrap/lib/Button';
-import Row from 'react-bootstrap/lib/Row';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
-import InputGroup from 'react-bootstrap/lib/InputGroup';
+import Grid from 'react-bootstrap/lib/Grid'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import Col from 'react-bootstrap/lib/Col'
+import Button from 'react-bootstrap/lib/Button'
+import Row from 'react-bootstrap/lib/Row'
+import FormGroup from 'react-bootstrap/lib/FormGroup'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup'
+import InputGroup from 'react-bootstrap/lib/InputGroup'
+import { convertToTime } from '../utils'
 
 export default function TaskList({filteredTasks, moveUp, moveDown, editTask, editDuration, remove, complete, filter, filters}) {
 
@@ -24,7 +25,7 @@ export default function TaskList({filteredTasks, moveUp, moveDown, editTask, edi
           <Button bsStyle="link" className="option-btn" onClick={() => moveDown(idx)}><Glyphicon glyph="chevron-down" /></Button>
         </Col>
 
-        <Col md={9} mdOffset={task.completed ? 1 : 0}>
+        <Col md={8} mdOffset={task.completed ? 1 : 0}>
           <FormGroup>
             <FormControl
               bsStyle="text"
@@ -39,12 +40,12 @@ export default function TaskList({filteredTasks, moveUp, moveDown, editTask, edi
           </FormGroup>
         </Col>
 
-        <Col md={1}>
+        <Col md={2}>
           <FormControl
             bsStyle="time"
             type="text"
             placeholder="30:00"
-            value={task.remaining}
+            value={convertToTime(task.remaining)}
             onChange={evt => editDuration(idx, evt.target.value)}
           />
         </Col>

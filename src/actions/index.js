@@ -1,3 +1,5 @@
+import { getFixedDuration } from '../utils'
+
 export const moveUp = currentIndex => {
   return {
     type: 'moveUp',
@@ -51,19 +53,23 @@ export const filter = (type, value) => {
 }
 
 export const addTask = newTask => {
+  const duration = getFixedDuration(newTask.predefinedDuration, newTask.duration)
+
   return {
     type: 'addTask',
     task: {
-      ...newTask,
-      remaining: newTask.duration,
+      description: newTask.description,
+      duration,
+      remaining: duration,
       completed: false
     }
   }
 }
 
-export const editNewDuration = value => {
+export const editNewDuration = (durationType, value) => {
   return {
     type: 'editNewDuration',
+    durationType,
     value
   }
 }

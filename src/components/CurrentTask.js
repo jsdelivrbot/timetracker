@@ -1,28 +1,44 @@
 import React from 'react'
-import Grid from 'react-bootstrap/lib/Grid';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Col from 'react-bootstrap/lib/Col';
-import Row from 'react-bootstrap/lib/Row';
-import Button from 'react-bootstrap/lib/Button';
+import Grid from 'react-bootstrap/lib/Grid'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import Col from 'react-bootstrap/lib/Col'
+import Row from 'react-bootstrap/lib/Row'
+import Button from 'react-bootstrap/lib/Button'
 import _ from 'lodash'
+import { convertToTime } from '../utils'
 
 export default class CurrentTask extends React.Component {
 
   componentWillMount(){
-    this.intervalId = setInterval(this.forceUpdate.bind(this), 1000)
+    this.intervalId = setInterval(() => {
+      const remaining = this.getRemaining()
+
+      if (remaining <= 0) {
+        clearInterval(this.intervalId)
+        this.props.complete(0)
+      }
+
+      this.forceUpdate()
+    }, 1000)
   }
 
   componentWillUnmount(){
     clearInterval(this.intervalId)
   }
 
-  render(){
+  getRemaining = () => {
     let remaining = this.props.activeTask.remaining
 
     if (!_.isNil(this.props.counterStarted)) {
       const elapsed = new Date().getTime() - this.props.counterStarted
       remaining = this.props.activeTask.remaining - Math.floor(elapsed / 1000)
     }
+
+    return remaining
+  }
+
+  render(){
+    const remaining = this.getRemaining()
 
     return (
       <Grid className="section current-task">
@@ -44,8 +60,8 @@ export default class CurrentTask extends React.Component {
           </Col>
 
           <Col md={6}>
-            <Col md={3}>
-              <span style={{letterSpacing: '5px', fontSize: '3em'}}>{remaining}</span>
+            <Col md={5}>
+              <span style={{letterSpacing: '5px', fontSize: '3em'}}>{convertToTime(remaining)}</span>
             </Col>
 
             <Col md={1}>

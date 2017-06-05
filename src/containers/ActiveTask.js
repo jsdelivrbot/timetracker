@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { CurrentTask } from '../components'
-import { toggleCounter, resetCounter } from '../actions'
+import { complete, remove, toggleCounter, resetCounter } from '../actions'
 
 const mapStateToProps = ({activeTask, taskList}) => {
   return {
@@ -14,8 +14,8 @@ const mapDispatchToProps = dispatch => {
   return {
     toggleCounter: (isRunning, remaining) => dispatch(toggleCounter(isRunning, remaining)),
     reset: isRunning => dispatch(resetCounter(isRunning)),
-    complete: () => { console.log("[*] complete") },
-    remove: () => { console.log("[*] remove") },
+    complete: () => dispatch(complete(0)),
+    remove: () => dispatch(remove(0)),
   }
 }
 

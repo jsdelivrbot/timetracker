@@ -15,7 +15,10 @@ const mapDipatchToProps = dispatch => {
       return dispatch(editNewTask(evt.target.value))
     },
     editNewDuration: evt => {
-      return dispatch(editNewDuration(evt.target.value))
+      return dispatch(editNewDuration('duration', evt.target.value))
+    },
+    editPredefinedDuration: evt => {
+      return dispatch(editNewDuration('predefinedDuration', evt.target.value))
     },
   }
 }

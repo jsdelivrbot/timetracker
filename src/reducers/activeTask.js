@@ -17,7 +17,6 @@ const resetCounter = isRunning => {
 const activeTask = (state = initialState, action) => {
   let delta
 
-  console.log("state:", state, ", action:", action)
   switch(action.type){
     case 'toggleCounter':
       delta = toggleCounter(action.isRunning, action.remaining)

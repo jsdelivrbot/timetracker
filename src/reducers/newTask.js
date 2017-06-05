@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import initialState from './initialState'
+import { getFixedDuration } from '../utils'
 
 const addTask = (currentTasks, task) => {
-  return {description: "", duration: ""}
+  return {description: "", duration: "", predefinedDuration: 'short'}
 }
 
 const newTask = (state = initialState, action) => {
@@ -16,7 +17,12 @@ const newTask = (state = initialState, action) => {
       delta = {description: action.value}
       break
     case 'editNewDuration':
-      delta = {duration: action.value}
+      if (action.durationType === 'duration') {
+        delta = {duration: action.value, predefinedDuration: 'other'}
+      } else {
+        const duration = getFixedDuration(action.value, "")
+        delta = {duration, predefinedDuration: action.value}
+      }
       break
     default:
       break
