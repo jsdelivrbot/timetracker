@@ -56,11 +56,11 @@ const convertToSeconds = hourExpression => {
 
 const getFixedDuration = (durationType, duration) => {
   if (durationType === 'short') {
-    return "5"
+    return "5:00"
   } else if (durationType === 'medium') {
     return "30:00"
   } else if (durationType === 'long') {
-    return "60:00"
+    return "1:00:00"
   }
 
   return duration

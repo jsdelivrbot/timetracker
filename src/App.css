@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  font-family: 'Roboto', sans-serif;
 }
 
 .option-btn {
@@ -45,10 +44,6 @@
 
 .section {
   margin-bottom: 20px;
-}
-
-.app {
-  padding: 20px;
 }
 
 .section.new-task .row {

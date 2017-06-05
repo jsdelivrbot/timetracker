@@ -14,7 +14,6 @@ export default class CurrentTask extends React.Component {
       const remaining = this.getRemaining()
 
       if (remaining <= 0) {
-        clearInterval(this.intervalId)
         this.props.complete(0)
       }
 
@@ -42,6 +41,12 @@ export default class CurrentTask extends React.Component {
 
     return (
       <Grid className="section current-task">
+        <Row>
+          <Col md={7} mdOffset={4}>
+            <h2>{this.props.activeTask.description}</h2>
+          </Col>
+        </Row>
+
         <Row>
           <Col md={1} mdOffset={3} mdHidden={!this.props.isRunning}>
             <Button

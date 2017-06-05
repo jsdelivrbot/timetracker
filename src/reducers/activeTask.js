@@ -3,9 +3,13 @@ import initialState from '../reducers/initialState'
 
 const toggleCounter = (isRunning, remaining) => {
   if (isRunning) {
-    return {counterStarted: null, running: false}
+    return disableCounter();
   }
   return {counterStarted: new Date().getTime(), running: true}
+}
+
+const disableCounter = () => {
+  return {counterStarted: null, running: false}
 }
 
 const resetCounter = isRunning => {
@@ -24,8 +28,11 @@ const activeTask = (state = initialState, action) => {
     case 'resetCounter':
       delta = resetCounter(action.isRunning)
       break
+    case 'complete':
+      delta = disableCounter()
+      break
     default:
-      break;
+      break
   }
 
   if (!_.isNil(delta)) {
