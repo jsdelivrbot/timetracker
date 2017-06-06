@@ -52,3 +52,14 @@
   padding: 10px 0 0 0;
 }
 
+path {
+  stroke-width: 1px;
+}
+
+tspan {
+  font-size: 15px;
+}
+
+path.domain {
+  fill: none;
+}

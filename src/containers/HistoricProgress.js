@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { History } from '../components'
 
-const mapStateToProps = state => {
-  return {}
+const mapStateToProps = ({taskList}) => {
+  return { tasks: taskList.tasks }
 }
 
 const mapDispatchToProps = dispatch => {

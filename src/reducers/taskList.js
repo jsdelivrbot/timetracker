@@ -27,6 +27,7 @@ const complete = (currentTasks, index) => {
   const completedTask = tasks[index]
   tasks.splice(index, 1)
   completedTask.completed = true
+  completedTask.completedAt = new Date().getTime()
   tasks.push(completedTask)
   return {tasks}
 }

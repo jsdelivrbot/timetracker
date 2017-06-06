@@ -61,7 +61,9 @@ export const addTask = newTask => {
       description: newTask.description,
       duration,
       remaining: duration,
-      completed: false
+      completed: false,
+      createdAt: new Date().getTime(),
+      completedAt: null,
     }
   }
 }

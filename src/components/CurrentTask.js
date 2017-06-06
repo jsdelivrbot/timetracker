@@ -42,7 +42,7 @@ export default class CurrentTask extends React.Component {
     return (
       <Grid className="section current-task">
         <Row>
-          <Col md={7} mdOffset={4}>
+          <Col md={7} mdOffset={3}>
             <h2>{this.props.activeTask.description}</h2>
           </Col>
         </Row>
