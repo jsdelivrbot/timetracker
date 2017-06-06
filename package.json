@@ -2,6 +2,10 @@
   "name": "timetracker",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "6.10.2"
+  },
+  "main": "index.js",
   "dependencies": {
     "casual-browserify": "^1.5.12",
     "lodash": "^4.17.4",
@@ -12,15 +16,23 @@
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "react-tap-event-plugin": "^2.0.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "ejs": "2.5.6",
+    "express": "4.15.2"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node index.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cultome/timetracker"
+  },
+  "license": "MIT"
 }
