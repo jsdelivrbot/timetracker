@@ -66,4 +66,17 @@ const getFixedDuration = (durationType, duration) => {
   return duration
 }
 
-export { getFixedDuration, convertToSeconds, convertToTime, pad }
+const get = (url, onSuccess) => {
+  const client = new XMLHttpRequest()
+
+  const response = function(){
+    console.log(this.responseText)
+    onSuccess(JSON.parse(this.responseText))
+  }
+
+  client.addEventListener('load', response)
+  client.open("GET", url)
+  client.send()
+}
+
+export { getFixedDuration, convertToSeconds, convertToTime, pad, get }
