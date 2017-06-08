@@ -72,7 +72,7 @@ const get = (onSuccess) => {
 
   const response = function(){
     let response = this.responseText
-    if (_.isEmpty) {
+    if (_.isEmpty(response)) {
       response = "[]"
     }
     onSuccess && onSuccess(JSON.parse(response))
@@ -88,7 +88,7 @@ const save = (tasks, onSuccess) => {
 
   const response = function(){
     let response = this.responseText
-    if (_.isEmpty) {
+    if (_.isEmpty(response)) {
       response = "{\"success\": false}"
     }
     onSuccess && onSuccess(JSON.parse(response))
