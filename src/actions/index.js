@@ -1,4 +1,10 @@
-import { getFixedDuration } from '../utils'
+import { convertToSeconds, getFixedDuration } from '../utils'
+
+export const disableCounter = currentIndex => {
+  return {
+    type: 'disableCounter'
+  }
+}
 
 export const moveUp = currentIndex => {
   return {
@@ -54,13 +60,14 @@ export const filter = (type, value) => {
 
 export const addTask = newTask => {
   const duration = getFixedDuration(newTask.predefinedDuration, newTask.duration)
+  const seconds = convertToSeconds(duration)
 
   return {
     type: 'addTask',
     task: {
       description: newTask.description,
-      duration,
-      remaining: duration,
+      duration: seconds,
+      remaining: seconds,
       completed: false,
       createdAt: new Date().getTime(),
       completedAt: null,
@@ -97,3 +104,17 @@ export const resetCounter = isRunning => {
     isRunning
   }
 }
+
+export const fetchTasks = tasks => {
+  return {
+    type: 'fetchTasks',
+    tasks
+  }
+}
+
+export const changeActiveTask = () => {
+  return {
+    type: 'changeActiveTask',
+  }
+}
+

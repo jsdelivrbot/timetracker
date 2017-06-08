@@ -2,7 +2,9 @@ import _ from 'lodash'
 import casual from 'casual-browserify'
 import moment from 'moment'
 
-const generatedTasks = _.range(80).map(() => {
+const dummyRegistries = 80
+
+const generatedTasks = _.range(dummyRegistries).map(() => {
   const duration = casual.integer(5*60, 120*60)
   const remaining = duration - casual.integer(0, duration/2)
   const completed = casual.coin_flip
@@ -19,14 +21,12 @@ const generatedTasks = _.range(80).map(() => {
   }
 })
 
-console.log(generatedTasks)
-
 const initialState = {
   activeTask: {counterStarted: null, running: false},
   newTask: {description: "", duration: "", predefinedDuration: 'short'},
   taskList: {
     filters: {duration: 'none', status: 'none'},
-    tasks: generatedTasks
+    tasks: []
   }
 }
 

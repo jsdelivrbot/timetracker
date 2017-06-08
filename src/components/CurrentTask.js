@@ -13,7 +13,7 @@ export default class CurrentTask extends React.Component {
     this.intervalId = setInterval(() => {
       const remaining = this.getRemaining()
 
-      if (remaining <= 0) {
+      if (remaining <= 0 && !_.isNil(this.props.activetask)) {
         this.props.complete(0)
       }
 
@@ -26,7 +26,7 @@ export default class CurrentTask extends React.Component {
   }
 
   getRemaining = () => {
-    let remaining = this.props.activeTask.remaining
+    let remaining = this.props.activetask ? this.props.activeTask.remaining : 0
 
     if (!_.isNil(this.props.counterStarted)) {
       const elapsed = new Date().getTime() - this.props.counterStarted
@@ -43,7 +43,7 @@ export default class CurrentTask extends React.Component {
       <Grid className="section current-task">
         <Row>
           <Col md={7} mdOffset={3}>
-            <h2>{this.props.activeTask.description}</h2>
+            <h2>{this.props.activeTask ? this.props.activeTask.description : ""}</h2>
           </Col>
         </Row>
 

@@ -5,7 +5,6 @@ var MongoClient = require('mongodb').MongoClient;
 
 function withConnection(fnc, cb){
   MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
-    console.log("Connected successfully to server");
     fnc(db, cb);
     db.close();
   });
@@ -13,7 +12,7 @@ function withConnection(fnc, cb){
 
 function getTasks(db, cb){
   var tasksCol = db.collection('tasks');
-  tasksCol.find({}).toArray(function(err, docs){
+  tasksCol.find({}).sort({"createdAt": -1}).toArray(function(err, docs){
     cb(docs);
   });
 }

@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import initialState from './initialState'
-import { convertToSeconds } from '../utils'
 
 const moveElementUp = (currentTasks, index) => {
   let tasks = _.clone(currentTasks)
@@ -39,8 +38,6 @@ const setFilter = (state, filter, value) => {
 }
 
 const addTask = (currentTasks, task) => {
-  const seconds = convertToSeconds(task.duration)
-  task.duration = task.remaining = seconds
   return {tasks: [task].concat(currentTasks)}
 }
 
@@ -97,9 +94,14 @@ const taskList = (state = initialState, action) => {
       break
 
     case 'resetCounter':
-        const newState = _.merge({}, state)
-        newState.tasks[0].remaining = newState.tasks[0].duration
-        return newState
+        const resetCounterState = _.merge({}, state)
+        resetCounterState.tasks[0].remaining = resetCounterState.tasks[0].duration
+        return resetCounterState
+
+    case 'fetchTasks':
+      const fetchTasksState = _.merge({}, state)
+      fetchTasksState.tasks = action.tasks
+      return fetchTasksState
 
     default:
       break

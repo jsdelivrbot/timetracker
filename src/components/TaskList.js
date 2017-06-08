@@ -21,8 +21,8 @@ export default function TaskList({filteredTasks, moveUp, moveDown, editTask, edi
     { filteredTasks().map((task, idx) => {
       return (<Row key={idx}>
         <Col md={1} mdHidden={task.completed}>
-          <Button bsStyle="link" className="option-btn" onClick={() => moveUp(idx)}><Glyphicon glyph="chevron-up" /></Button>
-          <Button bsStyle="link" className="option-btn" onClick={() => moveDown(idx)}><Glyphicon glyph="chevron-down" /></Button>
+          <Button bsStyle="link" className="option-btn" onClick={() => moveUp(idx, task)}><Glyphicon glyph="chevron-up" /></Button>
+          <Button bsStyle="link" className="option-btn" onClick={() => moveDown(idx, task)}><Glyphicon glyph="chevron-down" /></Button>
         </Col>
 
         <Col md={8} mdOffset={task.completed ? 1 : 0}>

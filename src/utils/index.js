@@ -1,3 +1,4 @@
+import _ from 'lodash'
 
 const convertToTime = (seconds) => {
   const hours = Math.floor(seconds / 3600)
@@ -66,17 +67,58 @@ const getFixedDuration = (durationType, duration) => {
   return duration
 }
 
-const get = (url, onSuccess) => {
+const get = (onSuccess) => {
   const client = new XMLHttpRequest()
 
   const response = function(){
-    console.log(this.responseText)
-    onSuccess(JSON.parse(this.responseText))
+    let response = this.responseText
+    if (_.isEmpty) {
+      response = "[]"
+    }
+    onSuccess && onSuccess(JSON.parse(response))
   }
 
   client.addEventListener('load', response)
-  client.open("GET", url)
+  client.open("GET", "/tasks")
   client.send()
 }
 
-export { getFixedDuration, convertToSeconds, convertToTime, pad, get }
+const save = (tasks, onSuccess) => {
+  const client = new XMLHttpRequest()
+
+  const response = function(){
+    let response = this.responseText
+    if (_.isEmpty) {
+      response = "{\"success\": false}"
+    }
+    onSuccess && onSuccess(JSON.parse(response))
+  }
+  client.addEventListener('load', response)
+
+  client.open("POST", "/tasks")
+
+  const data = JSON.stringify(_.isArray(tasks) ? tasks : [tasks])
+
+  client.setRequestHeader("Content-Type", "application/json")
+
+  client.send(data)
+}
+
+const update = (idx, tasks, onSuccess) => {
+  const client = new XMLHttpRequest()
+
+  const response = function(){
+    onSuccess && onSuccess(JSON.parse(this.responseText))
+  }
+  client.addEventListener('load', response)
+
+  client.open("PUT", "/tasks")
+
+  const data = JSON.stringify(_.isArray(tasks) ? tasks : [tasks])
+
+  client.setRequestHeader("Content-Type", "application/json")
+
+  client.send(data)
+}
+
+export { getFixedDuration, convertToSeconds, convertToTime, pad, get, save, update }

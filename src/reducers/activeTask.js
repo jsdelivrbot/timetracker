@@ -28,9 +28,25 @@ const activeTask = (state = initialState, action) => {
     case 'resetCounter':
       delta = resetCounter(action.isRunning)
       break
+    case 'changeActiveTask':
+      delta = disableCounter()
+      break
     case 'complete':
       delta = disableCounter()
       break
+    case 'addTask':
+      delta = disableCounter()
+      break;
+    case 'moveUp':
+      if (action.currentIndex === 1) {
+        delta = disableCounter()
+      }
+      break;
+    case 'moveDown':
+      if (action.currentIndex === 0) {
+        delta = disableCounter()
+      }
+      break;
     default:
       break
   }

@@ -6,7 +6,7 @@ const mapStateToProps = ({activeTask, taskList}) => {
   return {
     counterStarted: activeTask.counterStarted,
     isRunning: activeTask.running,
-    activeTask: taskList.tasks[0]
+    activeTask: taskList.tasks.length > 0 ? taskList.tasks[0] : null
   }
 }
 
