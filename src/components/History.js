@@ -9,7 +9,6 @@ import { LineGraph } from 'react-d3-responsive'
 export default class History extends React.Component {
 
   getChartInfo = (tasks) => {
-    console.log(this.chartData)
     if (!_.isEmpty(this.chartData)) {
       return {chartData: this.chartData, maxY: this.maxY}
     }

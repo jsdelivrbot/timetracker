@@ -26,7 +26,7 @@ export default class CurrentTask extends React.Component {
   }
 
   getRemaining = () => {
-    let remaining = this.props.activetask ? this.props.activeTask.remaining : 0
+    let remaining = this.props.activeTask ? this.props.activeTask.remaining : 0
 
     if (!_.isNil(this.props.counterStarted)) {
       const elapsed = new Date().getTime() - this.props.counterStarted

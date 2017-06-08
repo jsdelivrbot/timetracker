@@ -72,10 +72,9 @@ const get = (onSuccess) => {
 
   const response = function(){
     let response = this.responseText
-    if (_.isEmpty(response)) {
-      response = "[]"
+    if (!_.startsWith(response, "<")) {
+      onSuccess && onSuccess(JSON.parse(response))
     }
-    onSuccess && onSuccess(JSON.parse(response))
   }
 
   client.addEventListener('load', response)
@@ -88,10 +87,9 @@ const save = (tasks, onSuccess) => {
 
   const response = function(){
     let response = this.responseText
-    if (_.isEmpty(response)) {
-      response = "{\"success\": false}"
+    if (_.startsWith(response, "<")) {
+      onSuccess && onSuccess(JSON.parse(response))
     }
-    onSuccess && onSuccess(JSON.parse(response))
   }
   client.addEventListener('load', response)
 
