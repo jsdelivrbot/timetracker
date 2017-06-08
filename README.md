@@ -4,7 +4,7 @@ Proyecto para prueba tecnica
 
 ## Deploy en Heroku
 
-[https://glacial-shore-34654.herokuapp.com/] (https://glacial-shore-34654.herokuapp.com/)
+[https://glacial-shore-34654.herokuapp.com/](https://glacial-shore-34654.herokuapp.com/)
 
 ## Ejecutar en local
 
